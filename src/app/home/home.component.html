@@ -1,0 +1,47 @@
+<div>
+  <h1>Juego de Adivinación de Números Aleatorios</h1>
+  <hr>
+  <h2>Parámetros de Configuración del Juego</h2>
+  <form #configForm="ngForm" (ngSubmit)="recogerDatos()">
+    <div>
+      <label for="nombreUsuario">Nombre:</label><br>
+      <input type="text" id="nombreUsuario" name="nombreUsuario" [(ngModel)]="configuracion.nombreUsuario" required>
+    </div>
+    <br>
+    <div>
+      <label for="apellidoUsuario">Apellido:</label><br>
+      <input type="text" id="apellidoUsuario" name="apellidoUsuario" [(ngModel)]="configuracion.apellidoUsuario"
+        required>
+    </div>
+    <br>
+    <div>
+      <label for="rango">Rango de números a generar:</label><br>
+      <input type="number" id="rango" name="rango" [(ngModel)]="configuracion.rango" required>
+    </div>
+    <br>
+    <div>
+      <label for="intentos">Número de intentos:</label><br>
+      <input type="number" id="intentos" name="intentos" [(ngModel)]="configuracion.intentos" required>
+    </div>
+    <br>
+    <button type="submit">Recoger Datos</button>
+  </form>
+  <hr>
+  <h2 *ngIf="mostrarMensajeBienvenida">Ongi Etorri {{ configuracion.nombreUsuario }} {{ configuracion.apellidoUsuario }}
+  </h2>
+  <label for="numeroUsuario"> Introduce el Número a Adivinar</label><br>
+  <input type="number" id="numeroUsuario" name="numeroUsuario" [(ngModel)]="numeroUsuario" placeholder="-1"
+    (ngModelChange)="botonPresionado = false" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+  <div *ngIf="mostrarMensajeBienvenida">
+    <div *ngIf="!usuarioAdivinado" style="display: inline;"><br>Intentos Restantes : </div><br
+      *ngIf="usuarioAdivinado">{{ intentosRestantes }}
+  </div>
+  <br>{{ feedback }}<br>
+  <br>
+  <button (click)="verificarNumero()">Enviar</button>
+  <hr>
+  <ul *ngIf="mostrarLista || usuarioAdivinado">
+    <span *ngIf="mostrarLista && !usuarioAdivinado">"Se han acabado los intentos"</span>
+    <li *ngFor="let numero of numerosIntroducidos">{{ numero }}</li>
+  </ul>
+</div>
