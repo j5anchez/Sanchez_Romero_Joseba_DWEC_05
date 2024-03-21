@@ -66,7 +66,7 @@ export class HomeComponent {
           this.intentosRestantes--;
           this.numerosIntroducidos.push(this.numeroUsuario);
           this.feedback = '¿Has Adivinado? : NO';
-          if (this.botonPresionado && this.intentosRestantes === 0) {
+          if (this.botonPresionado && !this.intentosRestantes) {
             this.mostrarLista = true;
           } else {
             this.mostrarLista = false;
